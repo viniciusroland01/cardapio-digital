@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrinho</title>
+</head>
+<body>
+    <h1>Seu carrinho</h1>
+    {% if itens %}
+        {% for item in itens %}
+            <div>
+                <h2>{{ item.produto.nome }}</h2>
+                <p>Quantidade: {{ item.quantidade }}</p>
+                <p>Subtotal: R$ {{ item.subtotal }}</p>
+            </div>
+        {% endfor %}
+
+        <h2>Total: R$ {{ total }}</h2>
+
+    {% else %}
+        <p>Seu carrinho está vazio!</p>
+    {% endif %}
+
+        <a href="{% url 'home' %}">Voltar ao cardápio</a>
+</body>
+
+</html>

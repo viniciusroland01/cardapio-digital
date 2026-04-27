@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset = "UTF-8">
+    <title>Cardápio</title>
+</head>
+
+<body>
+    <h1>Menu de doces do dia</h1>
+
+    <a href="{% url 'ver_carrinho' %}">Ver carrinho</a>
+
+    {% for produto in produtos %}
+        <div>
+            <h2>{{produto.nome}}</h2>
+            <p>{{produto.descricao}}</p>
+            <p>{{produto.preco}}</p>
+            <a href="{% url 'adicionar_ao_carrinho' produto.id %}">Adicionar ao carrinho</a>
+        </div>
+    {% endfor %}
+</body>
+</html>
