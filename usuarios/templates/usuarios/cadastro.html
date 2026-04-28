@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title> <!-- título da aba do navegador -->
+</head>
+
+<body>
+
+    <h1>Criar conta</h1>
+
+    {% if messages %} <!-- se tiver mensagem de erro ou sucesso guardada, mostra na tela -->
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST"> <!-- formulário que envia os dados via POST para a view cadastro -->
+
+        {% csrf_token %} <!-- proteção obrigatória contra ataques — sem isso Django rejeita -->
+
+        <label>Usuário</label>
+        <input type="text" name="username"> <!-- é o nome pego na view com o request.POST.get -->
+
+        <label>Telefone</label>
+        <input type="text" name="telefone">
+
+        <label>Senha</label>
+        <input type="password" name="password">
+
+        <label>Confirmar senha</label>
+        <input type="password" name="password_confirm">
+
+        <button type="submit">Cadastrar</button> <!-- envia o formulário -->
+        
+    </form>
+
+    <a href="{% url 'login' %}">Já tem conta? Faça login</a> <!-- link que usa o apelido 'login' definido no urls.py -->
+
+</body>
+
+</html>

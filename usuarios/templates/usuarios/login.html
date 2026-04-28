@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title> <!-- título da aba do navegador -->
+</head>
+
+<body> 
+
+    <h1>Entrar</h1>
+
+    {% if messages %} <!-- se tiver mensagem de erro ou sucesso guardada, mostra na tela -->
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST"> <!-- formulário que envia os dados via POST para a view cadastro -->
+
+        {% csrf_token %} <!-- proteção obrigatória contra ataques — sem isso Django rejeita -->
+
+        <label>Usuário</label>
+        <input type="text" name="username">
+
+        <label>Senha</label>
+        <input type="password" name="password">
+
+        <button type="submit">Entrar</button>
+
+    </form>
+
+    <a href="{% url 'cadastro' %}">Não tem conta? Cadastre-se</a> <!-- link para cadastro usando apelido definido no urls.py -->
+
+</body>
+
+</html>
