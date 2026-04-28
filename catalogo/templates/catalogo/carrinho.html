@@ -2,26 +2,27 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Carrinho</title>
+    <title>Carrinho</title> <!-- título da aba do navegador -->
 </head>
 <body>
-    <h1>Seu carrinho</h1>
-    {% if itens %}
-        {% for item in itens %}
+    <h1>Seu carrinho</h1> 
+    {% if itens %} <!-- se a lista 'itens' não estiver vazia, mostra os produtos -->
+        {% for item in itens %} <!-- a cada loop 'item' é um produto no carrinho -->
             <div>
-                <h2>{{ item.produto.nome }}</h2>
-                <p>Quantidade: {{ item.quantidade }}</p>
-                <p>Subtotal: R$ {{ item.subtotal }}</p>
+                <h2>{{ item.produto.nome }}</h2> <!-- acessa o nome do produto dentro do item -->
+                <p>Quantidade: {{ item.quantidade }}</p>  
+                <p>Subtotal: R$ {{ item.subtotal }}</p> <!-- calculado na view -->
             </div>
-        {% endfor %}
+        {% endfor %} 
 
-        <h2>Total: R$ {{ total }}</h2>
+        <h2>Total: R$ {{ total }}</h2> <!-- calculado na view -->
+        <a href="{% url 'finalizar_pedido' %}">Finalizar pedido via WhatsApp</a> <!-- link que chama a função finalizar_pedido -->
 
     {% else %}
-        <p>Seu carrinho está vazio!</p>
+        <p>Seu carrinho está vazio!</p> <!-- se o carrinho estiver vazio, mostra a mensagem -->
     {% endif %}
 
-        <a href="{% url 'home' %}">Voltar ao cardápio</a>
+        <a href="{% url 'home' %}">Voltar ao cardápio</a> <!-- link que usa o apelido 'home' definido no urls.py -->
 </body>
 
 </html>
