@@ -1,0 +1,58 @@
+{% load static %} <!-- carrega o sistema de arquivos estáticos do Django (CSS, JS, imagens) -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- garante que o site funciona bem no celular -->
+    <title> {% block title %}Cardápio{% endblock %}</title> <!-- block title = cada página pode definir seu próprio título -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!-- importa a fonte Google Fonts -->
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- importa o CSS principal -->
+
+    {% block extra_css %}{% endblock %} <!-- espaço para CSS extra em páginas específicas -->
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <a href="{% url 'home' %}">Cardápio</a> <!-- link para a home usando apelido definido no urls.py -->
+        </div>
+
+        <div class="navbar-links">
+
+            <a href="{% url 'ver_carrinho' %}" class="btn-carrinho">🛒 Carrinho</a> <!-- link para o carrinho -->
+
+            {% if user.is_authenticated %} <!-- se o usuário estiver logado, mostra nome, pontos e botão sair -->
+                <span class="navbar-usuario">Olá, {{ user.username }}!</span>
+                <span class="navbar-pontos">⭐ {{ user.perfil.pontos }}/20 pts</span>
+                <a href="{% url 'sair' %}" class="btn-sair">Sair</a>
+            {% else %} <!-- se não estiver logado, mostra login e cadastro -->
+                <a href="{% url 'login' %}" class="btn-login">Login</a>
+                <a href="{% url 'cadastro' %}" class="btn-cadastro">Cadastro</a>
+            {% endif %}
+
+        </div>
+    </nav>
+
+    {% if messages %} <!-- MENSAGENS — mostra erros e sucessos vindos das views -->
+        <div class="messages-container">
+            {% for message in messages %}
+            <div class="message message-{{ message.tags }}"> <!-- message.tags = tipo da mensagem (error, success) — usado no CSS -->
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %} 
+
+    <main class="main-content">{% block content %}{% endblock %}</main> <!-- conteúdo de cada página -->
+
+    <footer class="footer">
+        <p>© 2026 Cardápio Digital — Desenvolvido por Vinícius Roland</p>
+        <a href="https://wa.me/5532988366586?text=Olá%20Vinícius,%20vi%20o%20projeto%20da%20Fernanda%20Doces%20e%20gostaria%20de%20falar%20sobre%20um%20sistema!"></a>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script> <!-- JS principal -->
+    {% block extra_js %}{% endblock %} <!-- espaço para JS extra em páginas específicas -->
+
+</body>
+</html>
