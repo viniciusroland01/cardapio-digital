@@ -1,30 +1,19 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset = "UTF-8">
-    <title>Cardápio</title> <!-- título da aba do navegador -->
-</head>
+{% extends 'base.html' %} <!-- estrutura do base.html (navbar,footer,css) -->
 
-<body>
+{% block title %}Cardápio{% endblock %} <!-- title do base.html -->
+
+{% block content %} <!-- main do base.html -->
+
     <h1>Menu de doces do dia</h1>
 
-    {% if user.is_authenticated %} <!-- verifica se o usuário está logado -->
-        <p>Olá, {{ user.username }}! Pontos acumulados: &nbsp; {{ user.perfil.pontos }}/20</p> <!-- &nbsp; forçar espaço extra -->
-        <a href="{% url 'sair' %}">Sair</a> <!-- link da função definida -->
-    {% else %} <!-- se não estiver logado mostra login e cadastro -->
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'cadastro' %}">Cadastro</a>
-    {% endif %}
-
-    <a href="{% url 'ver_carrinho' %}">Ver carrinho</a> <!-- link da função definida -->
-
     {% for produto in produtos %}
-        <div>
+        <div class="card-produto"> <!-- div que vai receber o estilo CSS do card -->
+            <img src="{{ produto.imagem.url }}" alt="{{produto.nome}}">
             <h2>{{produto.nome}}</h2>
             <p>{{produto.descricao}}</p>
             <p>{{produto.preco}}</p>
             <a href="{% url 'adicionar_ao_carrinho' produto.id %}">Adicionar ao carrinho</a> <!-- link para passar o id do produto para a função adicionar_ao_carrinho -->
         </div>
     {% endfor %}
-</body>
-</html>
+
+{% endblock %}

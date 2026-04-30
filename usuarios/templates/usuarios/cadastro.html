@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends 'base.html' %} <!-- estrutura do base.html (navbar,footer,css) -->
 
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro</title> <!-- título da aba do navegador -->
-</head>
+{% block title %}Cadastro{% endblock %} <!-- define o título da aba -->
 
-<body>
+{% block content %} <!-- main do base.html -->
 
     <h1>Criar conta</h1>
 
@@ -17,8 +13,7 @@
     {% endif %}
 
     <form method="POST"> <!-- formulário que envia os dados via POST para a view cadastro -->
-
-        {% csrf_token %} <!-- proteção obrigatória contra ataques — sem isso Django rejeita -->
+        {% csrf_token %} <!-- proteção obrigatória -->
 
         <label>Usuário</label>
         <input type="text" name="username"> <!-- é o nome pego na view com o request.POST.get -->
@@ -38,6 +33,4 @@
 
     <a href="{% url 'login' %}">Já tem conta? Faça login</a> <!-- link que usa o apelido 'login' definido no urls.py -->
 
-</body>
-
-</html>
+{% endblock %}

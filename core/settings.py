@@ -123,3 +123,6 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 LOGIN_REDIRECT_URL = '/' # redireciona para a home após login
 
 LOGOUT_REDIRECT_URL = '/' # redireciona para a home após logout
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends 'base.html' %} <!-- estrutura do base.html (navbar,footer,css) -->
 
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title> <!-- título da aba do navegador -->
-</head>
+{% block title %}Login{% endblock %} <!-- define o título da aba -->
 
-<body> 
+{% block content %} <!-- main do base.html -->
 
     <h1>Entrar</h1>
 
@@ -32,6 +28,4 @@
 
     <a href="{% url 'cadastro' %}">Não tem conta? Cadastre-se</a> <!-- link para cadastro usando apelido definido no urls.py -->
 
-</body>
-
-</html>
+{% endblock %}

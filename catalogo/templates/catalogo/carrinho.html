@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Carrinho</title> <!-- título da aba do navegador -->
-</head>
-<body>
+{% extends 'base.html' %} <!-- herda toda a estrutura do base.html -->
+
+{% block title %}Carrinho{% endblock %} <!-- define o título da aba -->
+
+{% block content %} <!-- main do base.html -->
+
     <h1>Seu carrinho</h1> 
+
     {% if itens %} <!-- se a lista 'itens' não estiver vazia, mostra os produtos -->
         {% for item in itens %} <!-- a cada loop 'item' é um produto no carrinho -->
-            <div>
+            <div class="card-carrinho"> <!-- recebe o estilo css do card -->
+                <img src="{{ item.produto.imagem.url }}" alt="{{ item.produto.nome }}">
                 <h2>{{ item.produto.nome }}</h2> <!-- acessa o nome do produto dentro do item -->
                 <p>Quantidade: {{ item.quantidade }}</p>  
                 <p>Subtotal: R$ {{ item.subtotal }}</p> <!-- calculado na view -->
@@ -23,6 +24,4 @@
     {% endif %}
 
         <a href="{% url 'home' %}">Voltar ao cardápio</a> <!-- link que usa o apelido 'home' definido no urls.py -->
-</body>
-
-</html>
+{% endblock %}
