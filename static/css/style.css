@@ -1,0 +1,101 @@
+:root {
+    --cor-principal: #c8956c;
+    --cor-escura: #5c3d2e;
+    --cor-clara: #fdf6f0;
+    --cor-destaque: #e8b89a;
+    --cor-texto: #2d2d2d;
+    --cor-branco: #ffffff;
+    --sombra: 0 2px 15px rgba(0,0,0,0.1);
+    --borda-arredondada: 12px;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-clara);
+    color: var(--cor-texto);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar {
+    background-color: var(--cor-escura);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--sombra);      
+    position: stick;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-logo a {
+    color: var(--cor-branco);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-usuario {
+    color: var(--cor-destaque);
+    font-weight: 500;
+}
+
+.navbar-pontos {
+    color: var(--cor-branco);
+    font-size: 0.9rem;
+}
+
+.btn-carrinho, .btn-login, .btn-cadastro, .btn-sair {
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-carrinho {
+    background-color: var(--cor-principal);
+    color: var(--cor-branco);
+}
+
+.btn-login {
+    border: 2px solid var(--cor-branco);
+    color: var(--cor-branco);
+}
+
+.btn-cadastro {
+    background-color: var(--cor-principal);
+    color: var(--cor-branco);
+}
+
+.btn-sair {
+    border: 2px solid var(--cor-destaque);
+    color: var(--cor-destaque);
+}
+
+.btn-carrinho:hover, btn-cadastro:hover {
+    background-color: var(--cor-destaque);
+    color: var(--cor-escura);
+}
+
+.btn-login:hover, .btn-sair:hover {
+    background-color: var(--cor-branco);
+    color: var(--cor-escura);
+}
