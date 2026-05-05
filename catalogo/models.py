@@ -10,4 +10,7 @@ class Produto(models.Model):
     def __str__(self):
         return f'{self.nome} - R$ {self.preco}'
     
+    def preco_formatado(self):
+        return f'R$ {self.preco:,.2f}'.replace(',','X').replace('.',',').replace('X','.')
+        
 

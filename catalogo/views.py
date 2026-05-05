@@ -27,18 +27,21 @@ def ver_carrinho(request):
             produto = Produto.objects.get(id=produto_id) #busca o produto no banco pelo id
             qtd = int(quantidade) #garante que a quantidade seja um número inteiro
             subtotal = produto.preco * qtd #calcula o subtotal desse item
+            subtotal_formatado = f'R$ {subtotal:,.2f}'.replace(',', 'X').replace('.', ',').replace('X', '.')
             total_geral += subtotal #adiciona o subtotal ao total geral
             itens_carrinho.append({
                 'produto' : produto,
                 'quantidade' : qtd,
-                'subtotal' : subtotal,
+                'subtotal' : subtotal_formatado,
             }) #adiciona um dicionário com os dados do item na lista
         except Produto.DoesNotExist: #se o produto não existir, ignora e continua
-            pass   
+            pass  
+
+    total_formatado = f'R$ {total_geral:,.2f}'.replace(',', 'X').replace('.', ',').replace('X', '.') #padrão brasileiro do preço
 
     return render(request, 'catalogo/carrinho.html', {
         'itens' : itens_carrinho,
-        'total' : total_geral,
+        'total' : total_formatado,
     }) #monta a página carrinho.html e manda os itens e o total
 
 def finalizar_pedido(request):

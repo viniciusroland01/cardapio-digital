@@ -4,6 +4,8 @@
 
 {% block content %} <!-- main do base.html -->
 
+<div class="form-container">
+
     <h1>Entrar</h1>
 
     {% if messages %} <!-- se tiver mensagem de erro ou sucesso guardada, mostra na tela -->
@@ -13,19 +15,24 @@
     {% endif %}
 
     <form method="POST"> <!-- formulário que envia os dados via POST para a view cadastro -->
-
         {% csrf_token %} <!-- proteção obrigatória contra ataques — sem isso Django rejeita -->
 
-        <label>Usuário</label>
-        <input type="text" name="username">
+        <div class="form-grupo">
+            <label>Usuário</label>
+            <input type="text" name="username">
+        </div>
 
-        <label>Senha</label>
-        <input type="password" name="password">
+        <div class="form-grupo">
+            <label>Senha</label>
+            <input type="password" name="password">
+        </div>
 
-        <button type="submit">Entrar</button>
+        <button type="submit" class="btn-submit">Entrar</button>
 
     </form>
 
-    <a href="{% url 'cadastro' %}">Não tem conta? Cadastre-se</a> <!-- link para cadastro usando apelido definido no urls.py -->
+    <p class="form-link">Não tem conta? <a href="{% url 'cadastro' %}">Cadastre</a></p> <!-- link para cadastro usando apelido definido no urls.py -->
+
+</div>
 
 {% endblock %}

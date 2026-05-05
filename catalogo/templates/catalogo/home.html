@@ -6,14 +6,18 @@
 
     <h1>Menu de doces do dia</h1>
 
-    {% for produto in produtos %}
-        <div class="card-produto"> <!-- div que vai receber o estilo CSS do card -->
-            <img src="{{ produto.imagem.url }}" alt="{{produto.nome}}">
-            <h2>{{produto.nome}}</h2>
-            <p>{{produto.descricao}}</p>
-            <p>{{produto.preco}}</p>
-            <a href="{% url 'adicionar_ao_carrinho' produto.id %}">Adicionar ao carrinho</a> <!-- link para passar o id do produto para a função adicionar_ao_carrinho -->
-        </div>
-    {% endfor %}
+    <div class="grid-produtos">
+
+        {% for produto in produtos %}
+            <div class="card-produto"> <!-- div que vai receber o estilo CSS do card -->
+                <img src="{{ produto.imagem.url }}" alt="{{produto.nome}}">
+                <h2>{{produto.nome}}</h2>
+                <p>{{produto.descricao}}</p>
+                <p class="preco">{{produto.preco_formatado}}</p>
+                <a href="{% url 'adicionar_ao_carrinho' produto.id %}">Adicionar ao carrinho</a> <!-- link para passar o id do produto para a função adicionar_ao_carrinho -->
+            </div>
+        {% endfor %}
+
+    </div>
 
 {% endblock %}

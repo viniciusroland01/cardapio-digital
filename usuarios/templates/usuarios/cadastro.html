@@ -4,33 +4,45 @@
 
 {% block content %} <!-- main do base.html -->
 
+<div class="form-container">
+
     <h1>Criar conta</h1>
 
     {% if messages %} <!-- se tiver mensagem de erro ou sucesso guardada, mostra na tela -->
         {% for message in messages %}
-            <p>{{ message }}</p>
+            <p class="message message-{{ message.tags }}">{{ message }}</p>
         {% endfor %}
     {% endif %}
 
     <form method="POST"> <!-- formulário que envia os dados via POST para a view cadastro -->
         {% csrf_token %} <!-- proteção obrigatória -->
 
-        <label>Usuário</label>
-        <input type="text" name="username"> <!-- é o nome pego na view com o request.POST.get -->
+        <div class="form-grupo">
+            <label>Usuário</label>
+            <input type="text" name="username"> <!-- é o nome pego na view com o request.POST.get -->
+        </div>
 
-        <label>Telefone</label>
-        <input type="text" name="telefone">
+        <div class="form-grupo">
+            <label>Telefone</label>
+            <input type="text" name="telefone">
+        </div>
 
-        <label>Senha</label>
-        <input type="password" name="password">
+        <div class="form-grupo">
+            <label>Senha</label>
+            <input type="password" name="password">
+        </div>
 
-        <label>Confirmar senha</label>
-        <input type="password" name="password_confirm">
+        <div class="form-grupo">
+            <label>Confirmar senha</label>
+            <input type="password" name="password_confirm">
+        </div>
 
-        <button type="submit">Cadastrar</button> <!-- envia o formulário -->
+        <button type="submit" class="btn-submit">Cadastrar</button> <!-- envia o formulário -->
         
     </form>
 
-    <a href="{% url 'login' %}">Já tem conta? Faça login</a> <!-- link que usa o apelido 'login' definido no urls.py -->
+    <p class="form-link">Já tem conta? <a href="{% url 'login' %}">Faça login</a></p> <!-- link que usa o apelido 'login' definido no urls.py -->
+
+</div>
 
 {% endblock %}
