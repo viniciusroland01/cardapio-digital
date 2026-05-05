@@ -312,7 +312,7 @@ h1 {
     color: var(--cor-branco);
     border: none;
     border-radius: 8px;
-    font-family: 'Poppins' sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -338,4 +338,32 @@ h1 {
 
 .form-link a:hover {
     color: var(--cor-escura);
+}
+
+.pontos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 120px;
+}
+
+.pontos-texto {
+    color: var(--cor-branco);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.barra-fundo {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    height: 6px;
+    overflow: hidden;
+}
+
+.barra-progresso {
+    height: 100%;
+    width: var(--progresso);
+    background: linear-gradient(90deg, var(--cor-destaque), var(--cor-principal));
+    border-radius: 10px;
+    transition: width 0.5s ease;
 }

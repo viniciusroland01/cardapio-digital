@@ -23,10 +23,21 @@
             <a href="{% url 'ver_carrinho' %}" class="btn-carrinho">🛒 Carrinho</a> <!-- link para o carrinho -->
 
             {% if user.is_authenticated %} <!-- se o usuário estiver logado, mostra nome, pontos e botão sair -->
+
                 <span class="navbar-usuario">Olá, {{ user.username }}!</span>
-                <span class="navbar-pontos">⭐ {{ user.perfil.pontos }}/20 pts</span>
+                <div class="pontos-container">
+                    <div class="pontos-info"> 
+                        <span class="pontos-texto">⭐ {{ user.perfil.pontos }}/20 pts</span> 
+                    </div>
+                    <div class="barra-fundo">
+                        <div class="barra-progresso" style="--progresso: {% widthratio user.perfil.pontos 20 100 %}%"></div> <!-- widthratio calcula a porcentagem: pontos/20*100 -->
+                    </div>
+                </div>
+
                 <a href="{% url 'sair' %}" class="btn-sair">Sair</a>
+
             {% else %} <!-- se não estiver logado, mostra login e cadastro -->
+
                 <a href="{% url 'login' %}" class="btn-login">Login</a>
                 <a href="{% url 'cadastro' %}" class="btn-cadastro">Cadastro</a>
             {% endif %}
