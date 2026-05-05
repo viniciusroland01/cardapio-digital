@@ -8,4 +8,6 @@ urlpatterns = [
     path('adicionar/<int:produto_id>/', views.adicionar_ao_carrinho, name='adicionar_ao_carrinho'), #URL /adicionar/x/ chama a função adicionar_ao_carrinho 
     path('carrinho/', views.ver_carrinho, name='ver_carrinho'), #URL /carrinho/ chama a função ver_carrinho
     path('finalizar/', views.finalizar_pedido, name='finalizar_pedido'), #URL 'finalizar/', chama a função finalizar_pedido
+    path('aumentar/<int:produto_id>/' , views.aumentar_quantidade , name='aumentar_quantidade'), #/aumentar/x/
+    path('diminuir/<int:produto_id>/' , views.diminuir_quantidade , name='diminuir_quantidade'), #/diminuir/x/
 ]

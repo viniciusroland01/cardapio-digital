@@ -11,10 +11,17 @@
         {% for produto in produtos %}
             <div class="card-produto"> <!-- div que vai receber o estilo CSS do card -->
                 <img src="{{ produto.imagem.url }}" alt="{{produto.nome}}">
-                <h2>{{produto.nome}}</h2>
-                <p>{{produto.descricao}}</p>
-                <p class="preco">{{produto.preco_formatado}}</p>
-                <a href="{% url 'adicionar_ao_carrinho' produto.id %}">Adicionar ao carrinho</a> <!-- link para passar o id do produto para a função adicionar_ao_carrinho -->
+                <div class="card-body">
+                    <h2>{{produto.nome}}</h2>
+                    <p>{{produto.descricao}}</p>
+                    <p class="preco">{{produto.preco_formatado}}</p>
+                    <div class="card-acoes">
+                        <a href="{% url 'diminuir_quantidade' produto.id %}" class="btn-qtd-home">−</a>
+                        <span class="qtd-carrinho" id="qtd-{{ produto.id }}">{{ produto.quantidade_carrinho }}</span>
+                        <a href="{% url 'aumentar_quantidade' produto.id %}" class="btn-qtd-home">+</a>
+                        <a href="{% url 'adicionar_ao_carrinho' produto.id %}" class="btn-adicionar">Adicionar</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- garante que o site funciona bem no celular -->
     <title> {% block title %}Cardápio{% endblock %}</title> <!-- block title = cada página pode definir seu próprio título -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!-- importa a fonte Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"> <!-- importa a fonte Google Fonts -->
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- importa o CSS principal -->
 
@@ -15,7 +15,10 @@
 <body>
     <nav class="navbar">
         <div class="navbar-logo">
-            <a href="{% url 'home' %}">Cardápio</a> <!-- link para a home usando apelido definido no urls.py -->
+            <a href="{% url 'home' %}">
+                <span class="logo-principal">Nome</span>
+                <span class="logo-secundario">da Loja</span>
+            </a> 
         </div>
 
         <div class="navbar-links">

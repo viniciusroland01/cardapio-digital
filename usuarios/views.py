@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .models import Perfil
 
@@ -26,6 +26,34 @@ def cadastro(request):
         return redirect ('login')
     
     return render(request, 'usuarios/cadastro.html') #se não for post (usuário só acessou a página), mostra o formulário
+
+def login_view(request):
+    if request.user.is_authenticated: #se estiver logado manda para a home
+        return redirect('home')
+    
+    if request.method == 'POST':
+        usuario_nome = request.POST.get('username')
+        senha = request.POST.get('password')
+
+        if not usuario_nome or not senha:
+            messages.error(request, 'Preencha todos os campos!')
+            return render(request, 'usuarios/login.html')
+        
+        if not User.objects.filter(username=usuario_nome).exists():
+            messages.error(request, 'Usuário não encontrado' )
+            return render(request, 'usuarios/login.html')
+        
+        usuario = authenticate(request, username=usuario_nome, password=senha)
+
+        if usuario is not None:
+            login(request, usuario)
+            return redirect('home')
+        else:
+            messages.error(request, 'Senha Incorreta ou usuário incorretos')  
+            return render(request, 'usuarios/login.html') 
+        
+    return render(request, 'usuarios/login.html')
+     
 
 def sair(request): #encerra a sessão e redireciona para a home depois de sair
     logout(request)

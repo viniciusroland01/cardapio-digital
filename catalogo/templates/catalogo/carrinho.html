@@ -10,10 +10,14 @@
         {% for item in itens %} <!-- a cada loop 'item' é um produto no carrinho -->
             <div class="card-carrinho"> <!-- recebe o estilo css do card -->
                 <img src="{{ item.produto.imagem.url }}" alt="{{ item.produto.nome }}">
-                <div>
+                <div class="carrinho-info">
                     <h2>{{ item.produto.nome }}</h2> <!-- acessa o nome do produto dentro do item -->
-                    <p>Quantidade: {{ item.quantidade }}</p>  
                     <p>Subtotal: {{ item.subtotal }}</p> <!-- calculado na view -->
+                </div>
+                <div class="carrinho-quantidade">
+                    <a href="{% url 'diminuir_quantidade' item.produto.id %}" class="btn-qtd">-</a>
+                    <span>{{ item.quantidade }}</span>
+                    <a href="{% url 'aumentar_quantidade' item.produto.id %}" class="btn-qtd">+</a>
                 </div>
             </div>
         {% endfor %} 

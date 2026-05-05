@@ -4,6 +4,11 @@ import urllib.parse
 
 def home(request):
     produtos = Produto.objects.filter(disponivel=True) #filtro dos disponíveis
+    carrinho = request.session.get('carrinho', {})
+
+    for produto in produtos: #adiciona a quantidade de cada produto ao objeto
+        produto.quantidade_carrinho = carrinho.get(str(produto.id), 0)
+
     return render(request, 'catalogo/home.html' , {'produtos': produtos}) #monta a página home.html e manda os produtos pra ela
 
 def adicionar_ao_carrinho(request,produto_id):
@@ -44,6 +49,36 @@ def ver_carrinho(request):
         'total' : total_formatado,
     }) #monta a página carrinho.html e manda os itens e o total
 
+def aumentar_quantidade(request, produto_id):
+    carrinho = request.session.get('carrinho', {})
+    id_str = str(produto_id)
+    if id_str in carrinho:
+        carrinho[id_str] += 1
+    else:
+        carrinho[id_str] = 1
+    request.session['carrinho'] = carrinho
+    request.session.modified = True
+    referencia = request.META.get('HTTP_REFERER', '') #verifica se veio do carrinho ou da home
+    if 'carrinho' in referencia:
+        return redirect('ver_carrinho')
+    return redirect('home')
+
+def diminuir_quantidade(request,produto_id):
+    carrinho = request.session.get('carrinho', {})
+    id_str = str(produto_id)
+    if id_str in carrinho:
+        carrinho[id_str] -= 1
+        if carrinho[id_str] <= 0:
+            del carrinho[id_str]
+    request.session['carrinho'] = carrinho
+    request.session.modified = True
+    # verifica se veio do carrinho ou da home
+    referencia = request.META.get('HTTP_REFERER', '')
+    if 'carrinho' in referencia:
+        return redirect('ver_carrinho')
+    return redirect('home')
+
+
 def finalizar_pedido(request):
     carrinho_sessao = request.session.get('carrinho', {}) #carrinho da sessão
     if not carrinho_sessao:
@@ -71,3 +106,6 @@ def finalizar_pedido(request):
     link_whatsapp = f'https://wa.me/5532988366586?text={texto_final}'
 
     return redirect(link_whatsapp) #redireciona para o whatsapp
+
+
+
