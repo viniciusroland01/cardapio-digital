@@ -3,8 +3,8 @@
 Aplicação web para confeitarias feita em Django. O cliente navega pelo catálogo,
 monta o carrinho e finaliza o pedido diretamente pelo WhatsApp.
 
-![tela principal](Sem%20titulo1111.png)
-![carrinho](Sem%20titulo2222.png)
+![tela principal](cardapio.png)
+![carrinho](carrinho.png)
 
 ## Funcionalidades
 
